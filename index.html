@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nicolás Bentancourt - nicobtcourt</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nicolás Bentancourt | nicobtcourt</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <header>
-    <h1>Nicolás Bentancourt</h1>
-    <nav>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1 class="logo">nicobtcourt</h1>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section id="inicio" class="hero">
-    <h2>¡Hola! Soy <span class="resaltado">nicobtcourt</span></h2>
-    <p>Apasionado por la tecnología, los sistemas inteligentes y las soluciones simples.</p>
-    <button onclick="saludar()">Saludame</button>
+    <div class="container">
+      <h2>Transformo ideas en soluciones digitales</h2>
+      <p>Soy Nicolás Bentancourt, desarrollador y consultor tecnológico.</p>
+      <a href="#contacto" class="btn">Contactame</a>
+    </div>
   </section>
 
-  <section id="sobre-mi">
-    <h2>Sobre mí</h2>
-    <p>Desarrollador web y entusiasta del automatismo. Me especializo en soluciones que combinan IA, flujos de trabajo y experiencia digital.</p>
+  <section id="servicios" class="services container">
+    <h2>Servicios</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Automatización con IA</h3>
+        <p>Diseño flujos inteligentes para negocios con herramientas como n8n y Make.</p>
+      </div>
+      <div class="card">
+        <h3>Asistencia tecnológica</h3>
+        <p>Acompaño a personas mayores y emprendimientos en su transformación digital.</p>
+      </div>
+      <div class="card">
+        <h3>Desarrollo Web</h3>
+        <p>Creo páginas web modernas, rápidas y accesibles con HTML, CSS y JavaScript.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-mi" class="about">
+    <div class="container">
+      <h2>Sobre mí</h2>
+      <p>Soy un apasionado de la tecnología con enfoque humano. Me interesa mejorar la vida de las personas a través de herramientas simples pero poderosas.</p>
+    </div>
   </section>
 
   <footer id="contacto">
-    <p>Conectá conmigo:</p>
-    <ul class="redes">
-      <li><a href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
-      <li><a href="https://github.com/nicobtcourt" target="_blank">GitHub</a></li>
-      <li><a href="mailto:tuemail@example.com">Email</a></li>
-    </ul>
-    <p>&copy; 2025 Nicolás Bentancourt</p>
+    <div class="container">
+      <h2>Contacto</h2>
+      <p>Podés encontrarme en:</p>
+      <div class="social">
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://github.com/nicobtcourt" target="_blank">GitHub</a>
+        <a href="mailto:tuemail@example.com">Email</a>
+      </div>
+      <p>&copy; 2025 Nicolás Bentancourt</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
