@@ -1,358 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nicobtcourt -Servicios de flujos de trabajo con IA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Custom font - Inter is a good default. Tailwind uses system fonts by default. */
-        body {
-            font-family: 'Inter', sans-serif; /* Ensure Inter is loaded or use a similar sans-serif font */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nicobtcourt - Automatización de Flujos de Trabajo</title>
 
-        /* Custom colors based on the provided images */
-        :root {
-            --color-primary-orange: #F58220; /* Extracted from logo/mascot */
-            --color-primary-purple: #6A4C9C; /* Extracted from mascot/text */
-            --color-primary-red: #D81E05;    /* Extracted from logo text */
-            --color-background-cream: #FFF9F0; /* Light background */
-            --color-text-dark: #333333;
-            --color-text-light: #FFFFFF;
-        }
+  <!-- SEO básico -->
+  <meta name="description" content="Automatización de procesos y flujos de trabajo con IA, APIs y n8n.">
+  <meta name="author" content="Nicolás Bentancourt">
+  <meta name="keywords" content="automatización, IA, flujos de trabajo, n8n, make, API, bots">
 
-        .bg-cream {
-            background-color: var(--color-background-cream);
-        }
-        .text-orange {
-            color: var(--color-primary-orange);
-        }
-        .text-purple {
-            color: var(--color-primary-purple);
-        }
-        .text-red {
-            color: var(--color-primary-red);
-        }
-        .bg-orange {
-            background-color: var(--color-primary-orange);
-        }
-        .bg-purple {
-            background-color: var(--color-primary-purple);
-        }
-        .hover-bg-orange-dark:hover {
-            background-color: #E07010; /* Darker shade of orange */
-        }
-         .hover-bg-purple-dark:hover {
-            background-color: #583E82; /* Darker shade of purple */
-        }
+  <!-- Open Graph -->
+  <meta property="og:title" content="nicobtcourt - Flujos de trabajo inteligentes" />
+  <meta property="og:description" content="Soluciones de automatización para negocios y emprendedores." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="ruta-a-tu-logo-o-imagen.jpg" />
+  <meta property="og:url" content="https://tusitio.com" />
 
-        /* Hero section specific styling */
-        .hero-section {
-            background-image: linear-gradient(to bottom, rgba(255, 249, 240, 0.8), rgba(255, 249, 240, 1)), url('53718625-3c3a-473f-99b3-93e90938cd2d.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-        /* Custom button style to match the aesthetic */
-        .btn-custom {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            color: var(--color-text-light);
-        }
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
 
-        .btn-custom-orange {
-            background-color: var(--color-primary-orange);
-        }
-        .btn-custom-orange:hover {
-            background-color: #E07010; /* Darker orange */
-        }
-        .btn-custom-purple {
-            background-color: var(--color-primary-purple);
-        }
-        .btn-custom-purple:hover {
-            background-color: #583E82; /* Darker purple */
-        }
-
-        /* Service card styling */
-        .service-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-        .service-card i {
-            font-size: 2.5rem; /* Icon size */
-            margin-bottom: 1rem;
-            color: var(--color-primary-orange);
-        }
-
-        /* Media Queries Example */
-        /* Adjust hero text size on smaller screens */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5rem; /* Tailwind class: text-4xl */
-            }
-            .hero-section p {
-                font-size: 1rem; /* Tailwind class: text-base */
-            }
-            .nav-links {
-                display: none; /* Hidden by default on mobile, shown by JS */
-                flex-direction: column;
-                width: 100%;
-                background-color: white; /* Or a theme color */
-                position: absolute;
-                top: 70px; /* Adjust based on header height */
-                left: 0;
-                z-index: 10;
-                padding: 1rem 0;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links a {
-                padding: 0.75rem 1rem;
-                text-align: center;
-                border-bottom: 1px solid #eee;
-            }
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-menu-button {
-                display: none; /* Hide hamburger on larger screens */
-            }
-            .nav-links {
-                display: flex !important; /* Ensure it's displayed */
-                flex-direction: row;
-                position: static;
-                width: auto;
-                background-color: transparent;
-                box-shadow: none;
-            }
-            .nav-links a {
-                padding: 0.5rem 1rem;
-                border-bottom: none;
-            }
-        }
-
-        /* Contact form styling */
-        .form-input {
-            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
-            padding: 0.75rem;
-            border-radius: 0.375rem; /* Tailwind rounded-md */
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: var(--color-primary-orange);
-            box-shadow: 0 0 0 2px rgba(245, 130, 32, 0.3); /* Orange focus ring */
-        }
-        textarea.form-input {
-            min-height: 120px;
-        }
-
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Iconos -->
+  <script src="https://kit.fontawesome.com/a2d1234567.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-cream text-text-dark antialiased">
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>nicobtcourt</h1>
+      <p>Automatización de flujos de trabajo con IA y herramientas low-code</p>
+      <a href="#contacto" class="cta-btn">Contactame</a>
+    </div>
+  </header>
 
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <img src="/img/logo.png" alt="Logo Tu Nieto Digital" class="h-12">
-                </a>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-text-dark focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-            <nav id="nav-links" class="nav-links hidden md:flex space-x-4 items-center">
-                <a href="#hero" class="text-gray-700 hover:text-orange">Inicio</a>
-                <a href="#services" class="text-gray-700 hover:text-orange">Servicios</a>
-                <a href="#about" class="text-gray-700 hover:text-orange">Sobre Nosotros</a>
-                <a href="#contact" class="btn-custom btn-custom-orange">Contacto</a>
-            </nav>
-        </div>
-    </header>
-
-    <section id="hero" class="hero-section min-h-screen flex items-center justify-center text-center px-4 py-16 md:py-24">
-        <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-xl max-w-3xl">
-            <img src="img/vieja.png" alt="Tecnología clara y sin estrés - Tu Nieto Digital ayudando a un adulto mayor" class="w-full max-w-md mx-auto mb-8 rounded-lg shadow-lg">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-purple mb-4">
-                Tecnología clara <span class="text-orange">y sin estrés</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-700 mb-8">
-                Te ayudamos a navegar el mundo digital de forma fácil y amigable.
-            </p>
-            <a href="#contact" class="btn-custom btn-custom-purple text-lg">¡Quiero Aprender Más!</a>
-        </div>
+  <main>
+    <section class="about">
+      <div class="container">
+        <h2>¿Qué hago?</h2>
+        <p>
+          Creo soluciones personalizadas para automatizar tareas repetitivas y mejorar la eficiencia de negocios usando herramientas como n8n, Make, APIs, bots y más.
+        </p>
+        <p>
+          Mi enfoque es simple: <strong>te ayudo a ahorrar tiempo, reducir errores y escalar tu negocio</strong>.
+        </p>
+      </div>
     </section>
 
-    <section id="services" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-purple mb-12">Nuestros Servicios</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3 class="text-xl font-semibold text-purple mb-2">Smartphones y Tablets</h3>
-                    <p class="text-gray-600">Aprende a usar tu teléfono o tablet, apps, videollamadas y más.</p>
-            </div>
-        </div>
+    <section class="contact" id="contacto">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p>¿Querés trabajar conmigo o tenés dudas? Estoy disponible para colaboraciones y consultas.</p>
+        <ul class="contact-links">
+          <li><i class="fas fa-envelope"></i> <a href="mailto:nicobtcourt@gmail.com">nicobtcourt@gmail.com</a></li>
+          <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/598XXXXXXXX" target="_blank">+598 XX XXX XXX</a></li>
+          <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/nicobtcourt" target="_blank">/in/nicobtcourt</a></li>
+        </ul>
+      </div>
     </section>
+  </main>
 
-    <section id="about" class="py-16 md:py-24 bg-cream">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-purple mb-8">Sobre Nicobtcourt</h2>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-lg text-gray-700 mb-4">
-                    En <span class="font-semibold text-orange">Nicobtcourt</span>, creemos que la tecnología es una herramienta poderosa para conectar, aprender y simplificar la vida
-                </p>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> nicobtcourt. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
-    <section id="contact" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-purple mb-12">Ponte en Contacto</h2>
-            <div class="max-w-xl mx-auto bg-cream p-8 rounded-lg shadow-lg">
-                <p class="text-gray-700 text-center mb-6">
-                    ¿Tienes preguntas o quieres agendar una sesión? ¡Estamos aquí para ayudarte!
-                    Envíanos un mensaje y te responderemos a la brevedad.
-                </p>
-                <form id="contactForm">
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700 font-semibold mb-2">Nombre Completo</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Ej: María González" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 font-semibold mb-2">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Ej: maria@ejemplo.com" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="phone" class="block text-gray-700 font-semibold mb-2">Teléfono (Opcional)</label>
-                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="Ej: 099 123 456">
-                    </div>
-                    <div class="mb-6">
-                        <label for="message" class="block text-gray-700 font-semibold mb-2">Tu Mensaje</label>
-                        <textarea id="message" name="message" class="form-input" rows="4" placeholder="Cuéntanos cómo podemos ayudarte..." required></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn-custom btn-custom-purple text-lg w-full md:w-auto">Enviar Mensaje</button>
-                    </div>
-                </form>
-                <div id="form-message" class="mt-4 text-center"></div>
-                 <div class="text-center mt-8 pt-6 border-t border-gray-300">
-                    <p class="text-gray-700 mb-2">También puedes contactarnos directamente:</p>
-                    <p class="text-lg text-purple font-semibold"><i class="fas fa-envelope mr-2 text-orange"></i> info@tunietodigital.com</p>
-                    <p class="text-lg text-purple font-semibold mt-1"><i class="fas fa-phone mr-2 text-orange"></i> (+598) 09X XXX XXX</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-purple text-white py-8 text-center">
-        <div class="container mx-auto px-6">
-            <img src="img/logo.png" alt="Logo Tu Nieto Digital en Footer" class="h-10 mx-auto mb-4 opacity-80">
-            <p>&copy; <span id="currentYear"></span> Tu Nieto Digital. Todos los derechos reservados.</p>
-            <p class="text-sm opacity-70">Diseñado con cariño para conectar generaciones.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const navLinks = document.getElementById('nav-links');
-
-        if (mobileMenuButton && navLinks) {
-            mobileMenuButton.addEventListener('click', () => {
-                navLinks.classList.toggle('active'); // 'active' class defined in CSS to show/hide
-            });
-        }
-
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                // Hide mobile menu on link click
-                if (navLinks && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-                const targetElement = document.querySelector(this.getAttribute('href'));
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Set current year in footer
-        const currentYearElement = document.getElementById('currentYear');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-
-
-        // Basic contact form submission handling (prevents default and shows a message)
-        const contactForm = document.getElementById('contactForm');
-        const formMessage = document.getElementById('form-message');
-
-        if (contactForm && formMessage) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent actual submission for this demo
-                
-                // Basic validation (can be expanded)
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const messageInput = document.getElementById('message');
-
-                if (!nameInput || !emailInput || !messageInput) {
-                    console.error("Uno o más campos del formulario no se encontraron.");
-                    formMessage.textContent = 'Error en el formulario. Intenta de nuevo.';
-                    formMessage.className = 'mt-4 text-center text-red-600';
-                    return;
-                }
-
-                const name = nameInput.value;
-                const email = emailInput.value;
-                const messageText = messageInput.value; // Renamed to avoid conflict
-
-                if (name.trim() === '' || email.trim() === '' || messageText.trim() === '') {
-                    formMessage.textContent = 'Por favor, completa todos los campos requeridos.';
-                    formMessage.className = 'mt-4 text-center text-red-600';
-                    return;
-                }
-
-                // Simulate form submission
-                formMessage.textContent = '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.';
-                formMessage.className = 'mt-4 text-center text-green-600';
-                contactForm.reset(); // Clear the form
-            });
-        }
-
-    </script>
-    <a href="https://wa.me/59891861021" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
-        <img src="img/contactame2.png" alt="WhatsApp" class="whatsapp-icon">
-    </a>
+  <script>
+    // Año automático en el footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
